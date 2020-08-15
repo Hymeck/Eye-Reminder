@@ -1,0 +1,138 @@
+﻿<Window x:Class="EyeReminder.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyeReminder.Windows"
+        xmlns:p="clr-namespace:EyeReminder.Properties"
+        xmlns:model="clr-namespace:EyeReminder.Models"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="{x:Static p:Resources.SettingsTitle}" Height="300" Width="300">
+
+    <Window.DataContext>
+        <model:SettingsViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label 
+                    Margin="5" 
+                    Content="{x:Static p:Resources.LeftTimeLabel}" 
+                    FontSize="{StaticResource Medium}"/>
+
+                <Label 
+                    x:Name="leftTimeMinute"
+                    HorizontalAlignment="Center"
+                    Margin="5"
+                    Grid.Column="1"
+                    FontSize="{StaticResource Medium}"/>
+
+                <Button
+                    x:Name="left25"
+                    Grid.Column="2"
+                    Content="25"
+                    Style="{StaticResource TimeButton}"
+                    Click="LeftTimeNumberClick"/>
+                
+                <Button
+                    x:Name="left45"
+                    Grid.Column="3"
+                    Content="45"
+                    Style="{StaticResource TimeButton}"
+                    Click="LeftTimeNumberClick"/>
+
+                <Button
+                    x:Name="left50"
+                    Grid.Column="4"
+                    Content="50"
+                    Style="{StaticResource TimeButton}"
+                    Click="LeftTimeNumberClick"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Label 
+                    Margin="5" 
+                    Content="{x:Static p:Resources.BreakTimeLabel}" 
+                    FontSize="{StaticResource Medium}"/>
+                
+                <Label
+                    x:Name="breakTimeMinute"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Margin="5" 
+                    FontSize="{StaticResource Medium}"/>
+                
+                <Button
+                    x:Name="break5"
+                    Grid.Column="2"
+                    Content="5"
+                    Style="{StaticResource TimeButton}"
+                    Click="BreakTimeNumberClick"/>
+                
+                <Button
+                    x:Name="break10"
+                    Grid.Column="3"
+                    Content="10"
+                    Style="{StaticResource TimeButton}"
+                    Click="BreakTimeNumberClick"/>
+                
+                <Button 
+                    x:Name="break15"
+                    Grid.Column="4"
+                    Content="15"
+                    Style="{StaticResource TimeButton}"
+                    Click="BreakTimeNumberClick"/>
+
+            </Grid>
+            
+            <Label Margin="5" Content="" FontSize="{StaticResource Medium}"/>
+            <Label Margin="5" Content="" FontSize="{StaticResource Medium}"/>
+            <!--<Label Margin="5" Content="{x:Static p:Resources.LanguageLabel}" FontSize="{StaticResource Medium}"/>
+            <Label Margin="5" Content="{x:Static p:Resources.ColorSchemeLabel}" FontSize="{StaticResource Medium}"/>-->
+            <!--<Label Margin="5" Content="Notification message" FontSize="{StaticResource Medium}"/>-->
+            <!--<Label Margin="5" Content="Enable notification with sound" FontSize="{StaticResource Medium}"/>-->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="15">
+                <Button
+                    x:Name="applyButton"
+                    Content="Apply" 
+                    Style="{StaticResource SettingsButton}"
+                    Click="ApplyButtonClick"/>
+                
+                <Button 
+                    x:Name="cancelButton"
+                    Content="Cancel" 
+                    Style="{StaticResource SettingsButton}"
+                    Click="CancelButtonClick"/>
+                
+                <Button 
+                    x:Name="backButton"
+                    Content="Back"
+                    Style="{StaticResource SettingsButton}"
+                    Click="BackButtonClick"/>
+                
+                
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Window>

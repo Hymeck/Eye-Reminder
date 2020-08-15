@@ -1,0 +1,100 @@
+﻿<Window x:Class="EyeReminder.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:EyeReminder.Models"
+        xmlns:local="clr-namespace:EyeReminder"
+        xmlns:p="clr-namespace:EyeReminder.Properties"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Closing="OnWindowClosing"
+        Title="{x:Static p:Resources.Title}"
+        Height="350"
+        Width="400">
+    <Window.DataContext>
+        <models:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid>
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>-->
+            <StackPanel
+                Orientation="Vertical"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Center"
+                Width="400">
+                
+                <StackPanel
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Margin="0, 5, 0, 0">
+
+                    <Button 
+                        Name="startButton"
+                        Content="{x:Static p:Resources.StartButtonLabel}" 
+                        Style="{StaticResource BaseButton}"
+                        Command="{Binding StartButtonCommand}"/>
+                    
+                    <Button 
+                        Name="stopButton"
+                        Content="{x:Static p:Resources.StopButtonLabel}" 
+                        Style="{StaticResource BaseButton}"
+                        Command="{Binding StopButtonCommand}"/>
+                    
+                    <!--<Button
+                        Name="resumeButton"
+                        Content="Resume" 
+                        Style="{StaticResource BaseButton}"/>-->
+                    
+                    <Button 
+                        Name="resetButton"
+                        Content="{x:Static p:Resources.ResetButtonLabel}" 
+                        Style="{StaticResource BaseButton}"
+                        Command="{Binding ResetButtonCommand}"/>
+                    
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+
+                    <!--<Button Name="decreaseLeftTimeButton"
+                            Content="-"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource BaseButton}"/>-->
+
+                    <Label 
+                    Name="timeLeftLabel" 
+                    Content="{Binding LeftTimeModel.LeftTime}" 
+                    HorizontalAlignment="Center" 
+                    Margin="20"
+                    FontSize="{StaticResource LeftTimeSize}"/>
+                    
+                    <!--<Button Name="increaseLeftTimeButton"
+                            Content="+"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource BaseButton}"/>-->
+                </StackPanel>
+                
+                <Label 
+                    Name="breakTimeLabel" 
+                    Content="{Binding BreakTimeModel.BreakTime}" 
+                    HorizontalAlignment="Center" 
+                    FontSize="{StaticResource BreakTimeSize}"/>
+                
+                <Button 
+                    Name="settingsButton"
+                    Content="{x:Static p:Resources.SettingsButtonLabel}"
+                    HorizontalAlignment="Right"
+                    Margin="0, 30, 15, 0"
+                    Width="60"
+                    Style="{StaticResource BaseButton}"
+                    Command="{Binding SettingsButtonCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

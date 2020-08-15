@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!--Dark green-->
+    <Color x:Key="DarkDefaultColor">#158150</Color>
+    <SolidColorBrush x:Key="DarkDefaultBrush" Color="{StaticResource DarkDefaultColor}"/>
+
+    <!--Not so dark green-->
+    <Color x:Key="MediumDefaultColor">#21A86D</Color>
+    <SolidColorBrush x:Key="MediumDefaultBrush" Color="{StaticResource MediumDefaultColor}"/>
+    
+    <!--White-->
+    <Color x:Key="LightDefaultColor">White</Color>
+    <SolidColorBrush x:Key="LightDefaultBrush" Color="{StaticResource LightDefaultColor}"/>
+
+    <!--Light blue-->
+    <Color x:Key="ActiveDefaultColor">#03E8FC</Color>
+    <SolidColorBrush x:Key="ActiveDefaultBrush" Color="{StaticResource ActiveDefaultColor}"/>
+    
+    <!--<Brighter pink-->
+    <Color x:Key="LightBaseColor">#FF2CB679</Color>
+    <SolidColorBrush x:Key="LightBaseBrush" Color="#FF2CB679" />
+
+    <SolidColorBrush x:Key="UltraLightBaseBrush" Color="#FF3BC588" />
+    <!--<Dark pink-->
+    <Color x:Key="UltraLightBaseColor">#FF3BC588</Color>
+
+    <SolidColorBrush x:Key="DarkBrush" Color="#FFD6D6D6" />
+    <!--<Skin-->
+    <Color x:Key="DarkColor">#FFD6D6D6</Color>
+
+    <SolidColorBrush x:Key="MediumBrush" Color="#FFF1F1F1" />
+    <!--<Pale skin-->
+    <Color x:Key="MediumColor">#FFF1F1F1</Color>
+
+    
+</ResourceDictionary>

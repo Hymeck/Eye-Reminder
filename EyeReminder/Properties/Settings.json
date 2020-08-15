@@ -1,0 +1,10 @@
+{
+  "LeftTime": "00.25.00",
+  "BreakTime": "00.05.00",
+  "BreakTimeNotificationMessage": "",
+  "BreakTimeOverNotificationMessage": "",
+
+  "Language": "en",
+  "AppColorScheme": "Default",
+  "IsNotificationSounded": false
+}
