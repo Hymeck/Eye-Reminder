@@ -1,38 +1,32 @@
-﻿using EyeReminder.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EyeReminder.Interfaces;
+using EyeReminder.Models;
 using System.Windows.Input;
 
-namespace EyeReminder.Models
+namespace EyeReminder.ViewModels
 {
-    class SettingsViewModel
+    class SettingsViewModel : ISettingsWindowViewModel
     {
-        public ConfigurationModel Configuration { get; }
-        public LeftTimeModel LeftTimeModel { get; private set; }
-        public BreakTimeModel BreakTimeModel { get; private set; }
-        //public TimeNumberModel TimeNumberModel { get; private set; }
+        public ConfigurationModel configuration;
+        public ICountdownTime LeftTimeModel { get; private set; }
+        public ICountdownTime BreakTimeModel { get; private set; }
         public ICommand ApplyButtonCommand { get; set; }
         public ICommand CancelButtonCommand { get; set; }
-        public ICommand DefaultButtonCommand { get; set; }
         public ICommand BackButtonCommand { get; set; }
 
         public SettingsViewModel() : this (ConfigurationModel.GetInstance()) { }
 
         public SettingsViewModel(ConfigurationModel configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
 
-            InitTimeModels(configuration);
+            InitTimeModels();
             //InitTimeNumbers(configuration);
             //InitCommands();
         }
-        private void InitTimeModels(ConfigurationModel configuration)
+        private void InitTimeModels()
         {
-            LeftTimeModel = new LeftTimeModel { LeftTime = configuration.LeftTime };
-            BreakTimeModel = new BreakTimeModel { BreakTime = configuration.BreakTime };
+            LeftTimeModel = new CountdownTimeModel { CountdownTime = configuration.LeftTime };
+            BreakTimeModel = new CountdownTimeModel { CountdownTime = configuration.BreakTime };
         }
 
         //private void InitTimeNumbers(ConfigurationModel configuration)

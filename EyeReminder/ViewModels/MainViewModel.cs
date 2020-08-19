@@ -1,4 +1,6 @@
-﻿using EyeReminder.Properties;
+﻿using EyeReminder.Interfaces;
+using EyeReminder.Models;
+using EyeReminder.Properties;
 using EyeReminder.Tools;
 using EyeReminder.Windows;
 using System;
@@ -7,35 +9,28 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace EyeReminder.Models
+namespace EyeReminder.ViewModels
 {
-    class MainViewModel
+    class MainViewModel : IMainWindowViewModel
     {
-        public ConfigurationModel Configuration { get; private set; }
-
-        public LeftTimeModel LeftTimeModel { get; set; }
-
-        public BreakTimeModel BreakTimeModel { get; set; }
-
-        public ICommand StartButtonCommand { get; set; }
-
-        public ICommand StopButtonCommand { get; set; }
-
-        public ICommand ResetButtonCommand { get; set; }
-
-        public ICommand SettingsButtonCommand { get; set; }
-
+        private ConfigurationModel configuration;
         private bool isTickingActive;
         private bool isLeftTimeTicking;
-
         private DispatcherTimer timer;
+
+        public ICountdownTime LeftTimeModel { get; private set; }
+        public ICountdownTime BreakTimeModel { get; private set; }
+        public ICommand StartButtonCommand { get; set; }
+        public ICommand StopButtonCommand { get; set; }
+        public ICommand ResetButtonCommand { get; set; }
+        public ICommand SettingsButtonCommand { get; set; }
 
         public MainViewModel(ConfigurationModel configuration)
         {
             isTickingActive = false;
             isLeftTimeTicking = true;
-            Configuration = configuration;
-            InitTimeModels(configuration);
+            this.configuration = configuration;
+            InitCountdownTimeModels();
             InitTimer();
             InitCommands();
         }
@@ -46,14 +41,14 @@ namespace EyeReminder.Models
         {
             StartButtonCommand = new Command(x => true, x => StartCountdown());
             StopButtonCommand = new Command(x => true, x => StopCountdown());
-            ResetButtonCommand = new Command(x => true, x => ResetLeftTime());
+            ResetButtonCommand = new Command(x => true, x => ResetCountdownTime());
             SettingsButtonCommand = new Command(x => true, x => OpenSettingsWindow());
         }
 
-        private void InitTimeModels(ConfigurationModel configuration)
+        private void InitCountdownTimeModels()
         {
-            LeftTimeModel = new LeftTimeModel { LeftTime = configuration.LeftTime };
-            BreakTimeModel = new BreakTimeModel { BreakTime = configuration.BreakTime };
+            LeftTimeModel = new CountdownTimeModel { CountdownTime = configuration.LeftTime };
+            BreakTimeModel = new CountdownTimeModel { CountdownTime = configuration.BreakTime };
         }
 
         private void InitTimer()
@@ -81,19 +76,19 @@ namespace EyeReminder.Models
             }
         }
 
-        private void ResetLeftTime()
+        private void ResetCountdownTime()
         {
-            if (LeftTimeModel.LeftTime != Configuration.LeftTime)
-                LeftTimeModel.LeftTime = Configuration.LeftTime;
-            if (BreakTimeModel.BreakTime != Configuration.BreakTime)
-                BreakTimeModel.BreakTime = Configuration.BreakTime;
+            if (LeftTimeModel.CountdownTime != configuration.LeftTime)
+                LeftTimeModel.CountdownTime = configuration.LeftTime;
+            if (BreakTimeModel.CountdownTime != configuration.BreakTime)
+                BreakTimeModel.CountdownTime = configuration.BreakTime;
         }
 
         private void OpenSettingsWindow()
         {
             new SettingsWindow().ShowDialog(); // returns false when window was closed
-            if (!isTickingActive)
-                RefreshStateTimeModels(ConfigurationModel.GetInstance());
+            //if (!isTickingActive)
+            //    RefreshStateTimeModels();
         }
 
         private void StartBreakTimeTick()
@@ -125,28 +120,30 @@ namespace EyeReminder.Models
 
         private void LeftTimeTick(object sender, EventArgs e)
         {
-            if (LeftTimeModel.LeftTime == TimeSpan.Zero)
+            if (LeftTimeModel.CountdownTime != TimeSpan.Zero)
             {
-                StopCountdown();
-                LeftTimeModel.LeftTime = Configuration.LeftTime;
-                ShowMessage(Configuration.BreakTimeNotificationMessage);
-                StartBreakTimeTick();
+                LeftTimeModel.CountdownTime -= Constants.Second;
+                return;
             }
-            else
-                LeftTimeModel.LeftTime -= Constants.Second;
+
+            StopCountdown();
+            ShowMessage(configuration.BreakTimeNotificationMessage);
+            LeftTimeModel.CountdownTime = configuration.LeftTime;
+            StartBreakTimeTick();
         }
 
         private void BreakTimeTick(object sender, EventArgs e)
         {
-            if (BreakTimeModel.BreakTime == TimeSpan.Zero)
+            if (BreakTimeModel.CountdownTime != TimeSpan.Zero)
             {
-                StopCountdown();
-                BreakTimeModel.BreakTime = Configuration.BreakTime;
-                ShowMessage(Configuration.BreakTimeOverNotificationMessage);
-                StartLeftTimeTick();
+                BreakTimeModel.CountdownTime -= Constants.Second;
+                return;
             }
-            else
-                BreakTimeModel.BreakTime -= Constants.Second;
+
+            StopCountdown();
+            ShowMessage(configuration.BreakTimeOverNotificationMessage);
+            BreakTimeModel.CountdownTime = configuration.BreakTime;
+            StartLeftTimeTick();
         }
 
         public void Close()
@@ -156,10 +153,10 @@ namespace EyeReminder.Models
             StopCountdown();
         }
 
-        public void RefreshStateTimeModels(ConfigurationModel configuration)
+        public void RefreshStateTimeModels()
         {
-            LeftTimeModel.LeftTime = configuration.LeftTime;
-            BreakTimeModel.BreakTime = configuration.BreakTime;
+            LeftTimeModel.CountdownTime = configuration.LeftTime;
+            BreakTimeModel.CountdownTime = configuration.BreakTime;
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyeReminder.Windows"
         xmlns:p="clr-namespace:EyeReminder.Properties"
-        xmlns:model="clr-namespace:EyeReminder.Models"
+        xmlns:model="clr-namespace:EyeReminder.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
@@ -109,9 +109,11 @@
             <Label Margin="5" Content="{x:Static p:Resources.ColorSchemeLabel}" FontSize="{StaticResource Medium}"/>-->
             <!--<Label Margin="5" Content="Notification message" FontSize="{StaticResource Medium}"/>-->
             <!--<Label Margin="5" Content="Enable notification with sound" FontSize="{StaticResource Medium}"/>-->
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="15">
+            <StackPanel 
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Margin="15">
+                
                 <Button
                     x:Name="applyButton"
                     Content="Apply" 

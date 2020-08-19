@@ -3,13 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:models="clr-namespace:EyeReminder.Models"
-        xmlns:local="clr-namespace:EyeReminder"
+        xmlns:models="clr-namespace:EyeReminder.ViewModels"
         xmlns:p="clr-namespace:EyeReminder.Properties"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Closing="OnWindowClosing"
         Title="{x:Static p:Resources.Title}"
         Height="350"
         Width="400">
@@ -59,20 +57,21 @@
                     
                     
                 </StackPanel>
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
+                <StackPanel 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
 
                     <!--<Button Name="decreaseLeftTimeButton"
                             Content="-"
                             HorizontalAlignment="Left"
                             Style="{StaticResource BaseButton}"/>-->
 
-                    <Label 
-                    Name="timeLeftLabel" 
-                    Content="{Binding LeftTimeModel.LeftTime}" 
-                    HorizontalAlignment="Center" 
-                    Margin="20"
-                    FontSize="{StaticResource LeftTimeSize}"/>
+                    <Label
+                        Name="timeLeftLabel" 
+                        Content="{Binding LeftTimeModel.CountdownTime}" 
+                        HorizontalAlignment="Center" 
+                        Margin="20"
+                        FontSize="{StaticResource LeftTimeSize}"/>
                     
                     <!--<Button Name="increaseLeftTimeButton"
                             Content="+"
@@ -82,7 +81,7 @@
                 
                 <Label 
                     Name="breakTimeLabel" 
-                    Content="{Binding BreakTimeModel.BreakTime}" 
+                    Content="{Binding BreakTimeModel.CountdownTime}" 
                     HorizontalAlignment="Center" 
                     FontSize="{StaticResource BreakTimeSize}"/>
                 

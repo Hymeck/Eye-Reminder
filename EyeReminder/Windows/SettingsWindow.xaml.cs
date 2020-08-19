@@ -1,17 +1,9 @@
-﻿using EyeReminder.Models;
+﻿using EyeReminder.Interfaces;
+using EyeReminder.Models;
+using EyeReminder.Tools;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace EyeReminder.Windows
 {
@@ -20,13 +12,23 @@ namespace EyeReminder.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private SettingsViewModel settingsViewModel;
         public SettingsWindow()
         {
             InitializeComponent();
-            settingsViewModel = new SettingsViewModel();
-            leftTimeMinute.Content = (int)settingsViewModel.Configuration.LeftTime.TotalMinutes;
-            breakTimeMinute.Content = (int)settingsViewModel.Configuration.BreakTime.TotalMinutes;
+            //Loaded += OnSettingsWindowLoaded;
+            SetTimeMinutes();
+        }
+
+        //private void OnSettingsWindowLoaded(object sender, RoutedEventArgs e)
+        //{
+        //    //applyButton.Click += 
+        //}
+
+        private void SetTimeMinutes()
+        {
+            ConfigurationModel configuration = ConfigurationModel.GetInstance();
+            leftTimeMinute.Content = (int)configuration.LeftTime.TotalMinutes;
+            breakTimeMinute.Content = (int)configuration.BreakTime.TotalMinutes;
         }
 
         private void LeftTimeNumberClick(object sender, RoutedEventArgs e)
@@ -45,8 +47,7 @@ namespace EyeReminder.Windows
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            leftTimeMinute.Content = (int)settingsViewModel.Configuration.LeftTime.TotalMinutes;
-            breakTimeMinute.Content = (int)settingsViewModel.Configuration.BreakTime.TotalMinutes;
+            SetTimeMinutes();
         }
 
         private void ApplyButtonClick(object sender, RoutedEventArgs e)
@@ -63,13 +64,5 @@ namespace EyeReminder.Windows
         {
             Close();
         }
-
-        //private void ResetOtherButtons(Button button)
-        //{
-        //    if (button.Equals(applyButton))
-        //    {
-
-        //    }
-        //}
     }
 }

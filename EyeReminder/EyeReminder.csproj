@@ -75,11 +75,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\BreakTimeModel.cs" />
-    <Compile Include="Models\LeftTimeModel.cs" />
-    <Compile Include="Models\MainViewModel.cs" />
-    <Compile Include="Models\TimeNumberModel.cs" />
-    <Compile Include="Models\SettingsViewModel.cs" />
+    <Compile Include="Interfaces\ICountdownTime.cs" />
+    <Compile Include="Interfaces\IMainWindowViewModel.cs" />
+    <Compile Include="Interfaces\ISettingsWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Models\CountdownTimeModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Properties\Resources.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
