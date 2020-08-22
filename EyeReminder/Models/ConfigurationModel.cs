@@ -22,10 +22,10 @@ namespace EyeReminder.Models
 
         private ConfigurationModel()
         {
-            //LeftTime = TimeSpan.FromMinutes((double)1 / 12);
-            //BreakTime = TimeSpan.FromMinutes((double)1 / 12);
-            LeftTime = TimeSpan.FromMinutes(25);
-            BreakTime = TimeSpan.FromMinutes(5);
+            LeftTime = TimeSpan.FromSeconds(1);
+            BreakTime = TimeSpan.FromSeconds(2);
+            //LeftTime = TimeSpan.FromMinutes(25);
+            //BreakTime = TimeSpan.FromMinutes(5);
             BreakTimeNotificationMessage = Resources.BreakTimeNotificationMessage;
             BreakTimeOverNotificationMessage = Resources.BreakTimeOverNotificationMessage;
             //Language = Language.English;

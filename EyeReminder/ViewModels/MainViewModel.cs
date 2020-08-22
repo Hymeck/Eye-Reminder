@@ -4,6 +4,7 @@ using EyeReminder.Properties;
 using EyeReminder.Tools;
 using EyeReminder.Windows;
 using System;
+using System.Media;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -87,8 +88,6 @@ namespace EyeReminder.ViewModels
         private void OpenSettingsWindow()
         {
             new SettingsWindow().ShowDialog(); // returns false when window was closed
-            //if (!isTickingActive)
-            //    RefreshStateTimeModels();
         }
 
         private void StartBreakTimeTick()
@@ -141,17 +140,14 @@ namespace EyeReminder.ViewModels
             }
 
             StopCountdown();
+            PlaySoundNotification();
             ShowMessage(configuration.BreakTimeOverNotificationMessage);
             BreakTimeModel.CountdownTime = configuration.BreakTime;
             StartLeftTimeTick();
         }
 
-        public void Close()
-        {
-            if (!isLeftTimeTicking)
-                isLeftTimeTicking = true;
-            StopCountdown();
-        }
+        private async void PlaySoundNotification() =>
+            await Task.Run(() => SystemSounds.Exclamation.Play());
 
         public void RefreshStateTimeModels()
         {
